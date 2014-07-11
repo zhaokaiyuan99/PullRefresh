@@ -42,7 +42,7 @@ class RefreshFooterView: RefreshBaseView {
     }
  
     //监听UIScrollView的属性
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: NSDictionary!, context: CMutableVoidPointer) {
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafePointer<()>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -54,7 +54,9 @@ class RefreshFooterView: RefreshBaseView {
             }
             adjustStateWithContentOffset()
         }
+    
     }
+     
     
     func adjustStateWithContentOffset()
     {

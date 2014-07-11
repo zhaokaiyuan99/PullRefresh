@@ -3,7 +3,7 @@
 //  PullRefresh
 //
 //  Created by SunSet on 14-6-25.
-//  Copyright (c) 2014年 zhaokaiyuan. All rights reserved.
+//  Copyright (c) 2014 zhaokaiyuan. All rights reserved.
 //
 
 import UIKit

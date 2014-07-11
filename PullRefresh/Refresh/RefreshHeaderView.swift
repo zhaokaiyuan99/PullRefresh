@@ -37,7 +37,8 @@ class RefreshHeaderView: RefreshBaseView {
         lastUpdateTimeLabel.backgroundColor = UIColor.clearColor()
         lastUpdateTimeLabel.textAlignment = NSTextAlignment.Center
         self.addSubview(lastUpdateTimeLabel);
-        if  NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) == nil {
+        
+        if  !NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey)  {
             self.lastUpdateTime = NSDate()
         } else {
             self.lastUpdateTime = NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) as NSDate
@@ -84,7 +85,7 @@ class RefreshHeaderView: RefreshBaseView {
     }
     
     //监听UIScrollView的contentOffset属性
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: NSDictionary!, context: CMutableVoidPointer) {
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafePointer<()>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -92,9 +93,12 @@ class RefreshHeaderView: RefreshBaseView {
             return
         }
         if RefreshContentOffset.isEqualToString(keyPath){
-        self.adjustStateWithContentOffset()
+            self.adjustStateWithContentOffset()
         }
+    
     }
+    
+   
     
     //调整状态
     func adjustStateWithContentOffset()
@@ -153,6 +157,7 @@ class RefreshHeaderView: RefreshBaseView {
             break
         case .Refreshing:
             self.statusLabel.text =  RefreshHeaderRefreshing;
+            
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 var top:CGFloat = self.scrollViewOriginalInset.top + self.frame.size.height
                 var inset:UIEdgeInsets = self.scrollView.contentInset

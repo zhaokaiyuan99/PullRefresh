@@ -426,6 +426,7 @@
 				CB5F290C195A5945005E3D86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB5F290D195A5945005E3D86 /* Build configuration list for PBXNativeTarget "PullRefreshTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +435,7 @@
 				CB5F290F195A5945005E3D86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
