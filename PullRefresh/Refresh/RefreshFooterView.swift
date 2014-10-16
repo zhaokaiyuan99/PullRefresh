@@ -9,7 +9,9 @@
 import UIKit
 class RefreshFooterView: RefreshBaseView {
     class func footer()->RefreshFooterView{
-        var footer:RefreshFooterView  = RefreshFooterView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, RefreshViewHeight))
+        var footer:RefreshFooterView  = RefreshFooterView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width,
+        CGFloat(RefreshViewHeight)))
+        
         return footer
     }
     
@@ -22,10 +24,10 @@ class RefreshFooterView: RefreshBaseView {
     
     override func willMoveToSuperview(newSuperview: UIView!) {
         super.willMoveToSuperview(newSuperview)
-        if self.superview{
-           self.superview.removeObserver(self, forKeyPath: RefreshContentSize, context: nil)
+        if (self.superview != nil){
+            self.superview!.removeObserver(self, forKeyPath: RefreshContentSize,context:nil)
         }
-        if newSuperview  {
+        if (newSuperview != nil)  {
             newSuperview.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
             // 重新调整frame
            adjustFrameWithContentSize()
@@ -42,7 +44,7 @@ class RefreshFooterView: RefreshBaseView {
     }
  
     //监听UIScrollView的属性
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafePointer<()>) {
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -54,9 +56,7 @@ class RefreshFooterView: RefreshBaseView {
             }
             adjustStateWithContentOffset()
         }
-    
     }
-     
     
     func adjustStateWithContentOffset()
     {

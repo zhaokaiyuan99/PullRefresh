@@ -9,7 +9,7 @@
 import UIKit
 class RefreshHeaderView: RefreshBaseView {
     class func footer()->RefreshHeaderView{
-        var footer:RefreshHeaderView  = RefreshHeaderView(frame: CGRectMake(0, 0,   UIScreen.mainScreen().bounds.width, RefreshViewHeight))
+        var footer:RefreshHeaderView  = RefreshHeaderView(frame: CGRectMake(0, 0,   UIScreen.mainScreen().bounds.width,  CGFloat(RefreshViewHeight)))
         return footer
     }
     
@@ -28,7 +28,7 @@ class RefreshHeaderView: RefreshBaseView {
     // 最后的更新时间lable
     var lastUpdateTimeLabel:UILabel!
     
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         lastUpdateTimeLabel = UILabel()
         lastUpdateTimeLabel.autoresizingMask = UIViewAutoresizing.FlexibleWidth
@@ -38,12 +38,16 @@ class RefreshHeaderView: RefreshBaseView {
         lastUpdateTimeLabel.textAlignment = NSTextAlignment.Center
         self.addSubview(lastUpdateTimeLabel);
         
-        if  !NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey)  {
+        if  (NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) == nil)  {
             self.lastUpdateTime = NSDate()
         } else {
-            self.lastUpdateTime = NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) as NSDate
+          self.lastUpdateTime = NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) as NSDate
         }
         self.updateTimeLabel()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
@@ -85,7 +89,7 @@ class RefreshHeaderView: RefreshBaseView {
     }
     
     //监听UIScrollView的contentOffset属性
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafePointer<()>) {
+    override  func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -95,8 +99,9 @@ class RefreshHeaderView: RefreshBaseView {
         if RefreshContentOffset.isEqualToString(keyPath){
             self.adjustStateWithContentOffset()
         }
-    
     }
+    
+   
     
    
     

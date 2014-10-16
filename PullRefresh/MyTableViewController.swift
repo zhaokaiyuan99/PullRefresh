@@ -20,7 +20,11 @@ class MyTableViewController: UITableViewController {
                 var text:String = "内容"+String( arc4random_uniform(10000))
                 self.fakeData!.addObject(text)
             }
-            let delayInSeconds:Int64 = NSEC_PER_SEC.asSigned() * 2
+            
+    
+            let delayInSeconds:Int64 =  1000000000  * 2
+            
+            
             var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
             dispatch_after(popTime, dispatch_get_main_queue(), {
                 self.tableView.reloadData()
@@ -30,14 +34,13 @@ class MyTableViewController: UITableViewController {
             })
         
         
-        
         self.tableView.addFooterWithCallback({
             for (var i:Int = 0; i<10; i++) {
                 var text:String = "内容"+String( arc4random_uniform(10000))
 
                 self.fakeData!.addObject(text)
             } 
-            let delayInSeconds:Int64 = NSEC_PER_SEC.asSigned() * 2
+            let delayInSeconds:Int64 = 1000000000 * 2
             var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
             dispatch_after(popTime, dispatch_get_main_queue(), {
                self.tableView.reloadData()
@@ -67,17 +70,19 @@ class MyTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.fakeData!.count
-    }
     
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-     
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     return self.fakeData!.count
+    }
+ 
+ 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
     }
 
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
     
         
         var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell

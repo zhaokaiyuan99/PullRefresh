@@ -16,7 +16,7 @@ class MyScrollViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         var rect:CGRect = self.view.frame
         scrollView = UIScrollView(frame: self.view.frame)
-        self.view.addSubview(scrollView)
+        self.view.addSubview(scrollView!)
         scrollView!.contentSize = self.view.frame.size
         scrollView!.backgroundColor = UIColor.clearColor()
         self.setupRefresh()
@@ -24,7 +24,7 @@ class MyScrollViewController: UIViewController {
     
     func setupRefresh(){
         self.scrollView!.addHeaderWithCallback({
-            let delayInSeconds:Int64 = NSEC_PER_SEC.asSigned() * 2
+            let delayInSeconds:Int64 = 1000000000 * 2
             var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
             dispatch_after(popTime, dispatch_get_main_queue(), {
                 self.scrollView!.contentSize = self.view.frame.size
@@ -33,7 +33,7 @@ class MyScrollViewController: UIViewController {
             })
         
         self.scrollView!.addFooterWithCallback({
-            let delayInSeconds:Int64 = NSEC_PER_SEC.asSigned() * 2
+            let delayInSeconds:Int64 =  1000000000 * 2
             var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
             dispatch_after(popTime, dispatch_get_main_queue(), {
                    var size:CGSize = self.scrollView!.frame.size

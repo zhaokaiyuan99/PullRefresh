@@ -27,22 +27,21 @@ class RootViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 2
     }
     
-    
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
      
         if indexPath.row == 0 {
-            self.navigationController.pushViewController(MyTableViewController(), animated: true)
+            self.navigationController?.pushViewController(MyTableViewController(), animated: true)
         }else if indexPath.row == 1{
-            self.navigationController.pushViewController(MyScrollViewController(), animated: true)
+            self.navigationController?.pushViewController(MyScrollViewController(), animated: true)
         }
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
         var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
