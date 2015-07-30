@@ -55,7 +55,7 @@ extension UIScrollView {
     {
         for object : AnyObject in self.subviews{
             if object is RefreshHeaderView{
-                var view:UIView  = object as UIView
+                var view:UIView  = object as! UIView
                 view.hidden = hidden
             }
         }
@@ -66,7 +66,7 @@ extension UIScrollView {
     {
         for object : AnyObject in self.subviews{
             if object is RefreshHeaderView{
-                var view:UIView  = object as UIView
+                var view:UIView  = object as! UIView
                 view.hidden = hidden
             }
         }
@@ -118,7 +118,7 @@ extension UIScrollView {
     {
         for object : AnyObject in self.subviews{
             if object is RefreshFooterView{
-                var view:UIView  = object as UIView
+                var view:UIView  = object as! UIView
                 view.hidden = hidden
             }
         }
@@ -129,7 +129,7 @@ extension UIScrollView {
     {
         for object : AnyObject in self.subviews{
             if object is RefreshFooterView{
-                var view:UIView  = object as UIView
+                var view:UIView  = object as! UIView
                 view.hidden = hidden
             }
         }

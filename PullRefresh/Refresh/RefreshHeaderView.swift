@@ -19,7 +19,7 @@ class RefreshHeaderView: RefreshBaseView {
         
     }
     didSet{
-        NSUserDefaults.standardUserDefaults().setObject(lastUpdateTime, forKey: RefreshHeaderTimeKey)
+        NSUserDefaults.standardUserDefaults().setObject(lastUpdateTime, forKey: RefreshHeaderTimeKey as String)
         NSUserDefaults.standardUserDefaults().synchronize()
         self.updateTimeLabel()
     }
@@ -38,10 +38,10 @@ class RefreshHeaderView: RefreshBaseView {
         lastUpdateTimeLabel.textAlignment = NSTextAlignment.Center
         self.addSubview(lastUpdateTimeLabel);
         
-        if  (NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) == nil)  {
+        if  (NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey as String) == nil)  {
             self.lastUpdateTime = NSDate()
         } else {
-          self.lastUpdateTime = NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey) as NSDate
+          self.lastUpdateTime = NSUserDefaults.standardUserDefaults().objectForKey(RefreshHeaderTimeKey as String) as! NSDate
         }
         self.updateTimeLabel()
     }
@@ -89,7 +89,7 @@ class RefreshHeaderView: RefreshBaseView {
     }
     
     //监听UIScrollView的contentOffset属性
-    override  func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override  func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -138,7 +138,7 @@ class RefreshHeaderView: RefreshBaseView {
     didSet{
         switch State{
         case .Normal:
-            self.statusLabel.text = RefreshHeaderPullToRefresh
+            self.statusLabel.text = RefreshHeaderPullToRefresh as String
             if RefreshState.Refreshing == oldState {
                 self.arrowImage.transform = CGAffineTransformIdentity
                 self.lastUpdateTime = NSDate()
@@ -155,13 +155,13 @@ class RefreshHeaderView: RefreshBaseView {
             }
             break
         case .Pulling:
-            self.statusLabel.text = RefreshHeaderReleaseToRefresh
+            self.statusLabel.text = RefreshHeaderReleaseToRefresh as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                  self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI ))
                 })
             break
         case .Refreshing:
-            self.statusLabel.text =  RefreshHeaderRefreshing;
+            self.statusLabel.text =  RefreshHeaderRefreshing as String;
             
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 var top:CGFloat = self.scrollViewOriginalInset.top + self.frame.size.height

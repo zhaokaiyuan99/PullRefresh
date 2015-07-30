@@ -25,7 +25,7 @@ class RefreshFooterView: RefreshBaseView {
     override func willMoveToSuperview(newSuperview: UIView!) {
         super.willMoveToSuperview(newSuperview)
         if (self.superview != nil){
-            self.superview!.removeObserver(self, forKeyPath: RefreshContentSize,context:nil)
+            self.superview!.removeObserver(self, forKeyPath: RefreshContentSize as String,context:nil)
         }
         if (newSuperview != nil)  {
             newSuperview.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
@@ -44,7 +44,7 @@ class RefreshFooterView: RefreshBaseView {
     }
  
     //监听UIScrollView的属性
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if (!self.userInteractionEnabled || self.hidden){
             return
         }
@@ -90,7 +90,7 @@ class RefreshFooterView: RefreshBaseView {
     didSet{
         switch State{
         case .Normal:
-            self.statusLabel.text = RefreshFooterPullToRefresh;
+            self.statusLabel.text = RefreshFooterPullToRefresh as String;
             if (RefreshState.Refreshing == oldState) {
                 self.arrowImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
                 UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
@@ -111,13 +111,13 @@ class RefreshFooterView: RefreshBaseView {
             
             break
         case .Pulling:
-            self.statusLabel.text = RefreshFooterReleaseToRefresh
+            self.statusLabel.text = RefreshFooterReleaseToRefresh as String
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                self.arrowImage.transform = CGAffineTransformIdentity
                 })
             break
         case .Refreshing:
-            self.statusLabel.text = RefreshFooterReleaseToRefresh;
+            self.statusLabel.text = RefreshFooterReleaseToRefresh as String;
             self.lastRefreshCount = self.totalDataCountInScrollView();
             UIView.animateWithDuration(RefreshSlowAnimationDuration, animations: {
                 var bottom:CGFloat = self.frame.size.height + self.scrollViewOriginalInset.bottom
@@ -144,14 +144,14 @@ class RefreshFooterView: RefreshBaseView {
     {
         var totalCount:Int = 0
         if self.scrollView is UITableView {
-            var tableView:UITableView = self.scrollView as UITableView
+            var tableView:UITableView = self.scrollView as! UITableView
            
             for (var i:Int = 0 ; i <  tableView.numberOfSections() ; i++){
                 totalCount = totalCount + tableView.numberOfRowsInSection(i)
                 
             }
         } else if self.scrollView is UICollectionView{
-          var collectionView:UICollectionView = self.scrollView as UICollectionView
+          var collectionView:UICollectionView = self.scrollView as! UICollectionView
             for (var i:Int = 0 ; i <  collectionView.numberOfSections() ; i++){
                 totalCount = totalCount + collectionView.numberOfItemsInSection(i)
                 
