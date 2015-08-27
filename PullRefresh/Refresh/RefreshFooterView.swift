@@ -8,9 +8,9 @@
 //
 import UIKit
 class RefreshFooterView: RefreshBaseView {
-    class func footer()->RefreshFooterView{
-        var footer:RefreshFooterView  = RefreshFooterView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width,
-        CGFloat(RefreshViewHeight)))
+    class func footer(x: CGFloat)->RefreshFooterView{
+        var footer:RefreshFooterView  = RefreshFooterView(frame: CGRectMake(-x, 0, UIScreen.mainScreen().bounds.width,
+        RefreshViewHeight))
         
         return footer
     }
@@ -19,7 +19,7 @@ class RefreshFooterView: RefreshBaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.statusLabel.frame = self.bounds;
+        self.statusLabel.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, RefreshViewHeight);
     }
     
     override func willMoveToSuperview(newSuperview: UIView!) {

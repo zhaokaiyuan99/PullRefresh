@@ -9,9 +9,28 @@
 import UIKit
 
 class MyTableViewController: UITableViewController {
+
     var fakeData:NSMutableArray?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fakeData = NSMutableArray()
+        for (var i:Int = 0; i<15; i++) {
+            var text:String = "内容"+String( arc4random_uniform(10000))
+            self.fakeData!.addObject(text)
+        }
+        
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "TableViewCellIdentifier")
+        self.setupRefresh()
+        
+        // tas.assaf()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     func setupRefresh(){
         self.tableView.addHeaderWithCallback({
@@ -50,28 +69,6 @@ class MyTableViewController: UITableViewController {
             })
         })
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fakeData = NSMutableArray()
-        for (var i:Int = 0; i<15; i++) {
-            var text:String = "内容"+String( arc4random_uniform(10000))
-            self.fakeData!.addObject(text)
-        }
-        
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "TableViewCellIdentifier")
-        self.setupRefresh()
-        
-        // tas.assaf()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fakeData!.count

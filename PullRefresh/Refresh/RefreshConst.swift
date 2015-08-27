@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import CoreGraphics
 
-let RefreshViewHeight:CFloat = 64.0
+let RefreshViewHeight:CGFloat = 64.0    // 这里应该是CGFloat吧
 let RefreshSlowAnimationDuration:NSTimeInterval = 0.3
 let RefreshFooterPullToRefresh:NSString = "上拉可以加载更多数据"
 let RefreshFooterReleaseToRefresh:NSString =  "松开立即加载更多数据"

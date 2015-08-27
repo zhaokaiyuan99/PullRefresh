@@ -8,8 +8,8 @@
 
 import UIKit
 class RefreshHeaderView: RefreshBaseView {
-    class func footer()->RefreshHeaderView{
-        var footer:RefreshHeaderView  = RefreshHeaderView(frame: CGRectMake(0, 0,   UIScreen.mainScreen().bounds.width,  CGFloat(RefreshViewHeight)))
+    class func footer(x: CGFloat)->RefreshHeaderView{
+        var footer:RefreshHeaderView  = RefreshHeaderView(frame: CGRectMake(-x, 0, UIScreen.mainScreen().bounds.width,  RefreshViewHeight))
         return footer
     }
     
@@ -55,7 +55,7 @@ class RefreshHeaderView: RefreshBaseView {
         var statusX:CGFloat = 0
         var statusY:CGFloat = 0
         var statusHeight:CGFloat = self.frame.size.height * 0.5
-        var statusWidth:CGFloat = self.frame.size.width
+        var statusWidth:CGFloat = UIScreen.mainScreen().bounds.width
         //状态标签
         self.statusLabel.frame = CGRectMake(statusX, statusY, statusWidth, statusHeight)
         //时间标签
