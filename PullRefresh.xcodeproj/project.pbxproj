@@ -91,11 +91,11 @@
 		CB5F28EE195A5945005E3D86 /* PullRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				CB5F2912195A5995005E3D86 /* Refresh */,
 				CB5F28F1195A5945005E3D86 /* AppDelegate.swift */,
 				CB5F2919195A5995005E3D86 /* RootViewController.swift */,
 				CB5F2910195A5995005E3D86 /* MyScrollViewController.swift */,
 				CB5F2911195A5995005E3D86 /* MyTableViewController.swift */,
-				CB5F2912195A5995005E3D86 /* Refresh */,
 				CB5F28FA195A5945005E3D86 /* Images.xcassets */,
 				CB5F28EF195A5945005E3D86 /* Supporting Files */,
 			);
@@ -355,6 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PullRefresh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -366,6 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = PullRefresh/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

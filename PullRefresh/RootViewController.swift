@@ -58,7 +58,7 @@ class RootViewController: UITableViewController {
             cell!.contentView.addSubview(label)
             label.tag = 1000001
         }
-        var label:UILabel = cell!.contentView.viewWithTag(1000001) as  UILabel
+        var label:UILabel = cell!.contentView.viewWithTag(1000001) as!  UILabel
         
         if indexPath.row == 0 {
          label.text = "tableView"

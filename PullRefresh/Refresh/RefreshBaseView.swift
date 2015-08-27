@@ -120,7 +120,7 @@ class RefreshBaseView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
          //箭头
-        let arrowX:CGFloat = self.frame.size.width * 0.5 - 100
+        let arrowX:CGFloat = UIScreen.mainScreen().bounds.width * 0.5 - 100
         self.arrowImage.center = CGPointMake(arrowX, self.frame.size.height * 0.5)
         //指示器
         self.activityView.center = self.arrowImage.center
@@ -132,19 +132,19 @@ class RefreshBaseView: UIView {
         // 旧的父控件
          
         if (self.superview != nil) {
-            self.superview?.removeObserver(self, forKeyPath: RefreshContentSize, context: nil)
+            self.superview?.removeObserver(self, forKeyPath: RefreshContentSize as String, context: nil)
             
             }
         // 新的父控件
         if (newSuperview != nil) {
-            newSuperview.addObserver(self, forKeyPath: RefreshContentOffset, options: NSKeyValueObservingOptions.New, context: nil)
+            newSuperview.addObserver(self, forKeyPath: RefreshContentOffset as String, options: NSKeyValueObservingOptions.New, context: nil)
             var rect:CGRect = self.frame
             // 设置宽度   位置
             rect.size.width = newSuperview.frame.size.width
             rect.origin.x = 0
             self.frame = frame;
             //UIScrollView
-            scrollView = newSuperview as UIScrollView
+            scrollView = newSuperview as! UIScrollView
             scrollViewOriginalInset = scrollView.contentInset;
         }
     }
