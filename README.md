@@ -15,3 +15,4 @@ self.tableView.addFooterWithCallback({
     // code
 }, x: x)
 ```
+
