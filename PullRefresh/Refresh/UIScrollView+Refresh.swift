@@ -12,17 +12,17 @@ import UIKit
 
 extension UIScrollView {
     func addHeaderWithCallback( callback:(() -> Void)!){
-        var header:RefreshHeaderView = RefreshHeaderView.footer()
+        let header:RefreshHeaderView = RefreshHeaderView.footer()
         self.addSubview(header)
         header.beginRefreshingCallback = callback
-        header.addState(RefreshState.Normal)
+        header.addState(state: RefreshState.normal)
     }
     
     func removeHeader()
     {
         
-        for view : AnyObject in self.subviews{
-            if view is RefreshHeaderView{
+        for object : AnyObject in self.subviews{
+            if let view = object as? RefreshHeaderView{
                 view.removeFromSuperview()
             }
         }
@@ -33,8 +33,8 @@ extension UIScrollView {
     {
         
         for object : AnyObject in self.subviews{
-            if object is RefreshHeaderView{
-                object.beginRefreshing()
+            if let view = object as? RefreshHeaderView{
+                view.beginRefreshing()
             }
         }
         
@@ -44,8 +44,8 @@ extension UIScrollView {
     func headerEndRefreshing()
     {
         for object : AnyObject in self.subviews{
-            if object is RefreshHeaderView{
-                object.endRefreshing()
+            if let view = object as? RefreshHeaderView{
+                view.endRefreshing()
             }
         }
         
@@ -54,89 +54,66 @@ extension UIScrollView {
     func setHeaderHidden(hidden:Bool)
     {
         for object : AnyObject in self.subviews{
-            if object is RefreshHeaderView{
-                var view:UIView  = object as UIView
-                view.hidden = hidden
+            if let view  = object as? RefreshHeaderView{
+                view.isHidden = hidden
             }
         }
-        
     }
     
     func isHeaderHidden()
     {
         for object : AnyObject in self.subviews{
-            if object is RefreshHeaderView{
-                var view:UIView  = object as UIView
-                view.hidden = hidden
+            if let view = object as? UIView{
+                view.isHidden = isHidden
             }
         }
-        
     }
     
    func addFooterWithCallback( callback:(() -> Void)!){
-        var footer:RefreshFooterView = RefreshFooterView.footer()
-      
+        let footer:RefreshFooterView = RefreshFooterView.footer()
         self.addSubview(footer)
         footer.beginRefreshingCallback = callback
-        
-        footer.addState(RefreshState.Normal)
+        footer.addState(state: RefreshState.normal)
     }
     
+     func removeFooter(){
     
-     func removeFooter()
-    {
-    
-        for view : AnyObject in self.subviews{
-            if view is RefreshFooterView{
+        for object : AnyObject in self.subviews{
+            if let view = object as? RefreshFooterView{
                 view.removeFromSuperview()
             }
         }
     }
     
-    func footerBeginRefreshing()
-    {
+    func footerBeginRefreshing(){
         for object : AnyObject in self.subviews{
-            if object is RefreshFooterView{
-                object.beginRefreshing()
+            if let view = object as? RefreshFooterView{
+                view.beginRefreshing()
             }
         }
-        
-    }
-
-    
-    func footerEndRefreshing()
-    {
-        for object : AnyObject in self.subviews{
-            if object is RefreshFooterView{
-                object.endRefreshing()
-            }
-        }
-     
-    }
-  
-    func setFooterHidden(hidden:Bool)
-    {
-        for object : AnyObject in self.subviews{
-            if object is RefreshFooterView{
-                var view:UIView  = object as UIView
-                view.hidden = hidden
-            }
-        }
-        
     }
     
-    func isFooterHidden()
-    {
+    func footerEndRefreshing(){
         for object : AnyObject in self.subviews{
-            if object is RefreshFooterView{
-                var view:UIView  = object as UIView
-                view.hidden = hidden
+            if let view = object as? RefreshFooterView{
+                view.endRefreshing()
             }
         }
-        
     }
   
- 
-
-
+    func setFooterHidden(hidden:Bool){
+        for object : AnyObject in self.subviews{
+            if let view:UIView  = object as? RefreshFooterView{
+                view.isHidden = hidden
+            }
+        }
+    }
+    
+    func isFooterHidden(){
+        for object : AnyObject in self.subviews{
+            if let view:UIView  = object as? RefreshFooterView{
+                view.isHidden = isHidden
+            }
+        }
+    }
 }

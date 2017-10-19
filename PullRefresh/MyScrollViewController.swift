@@ -13,44 +13,32 @@ class MyScrollViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
-        var rect:CGRect = self.view.frame
+        self.view.backgroundColor = UIColor.white
+
         scrollView = UIScrollView(frame: self.view.frame)
         self.view.addSubview(scrollView!)
         scrollView!.contentSize = self.view.frame.size
-        scrollView!.backgroundColor = UIColor.clearColor()
+        scrollView!.backgroundColor = UIColor.clear
         self.setupRefresh()
     }
     
     func setupRefresh(){
-        self.scrollView!.addHeaderWithCallback({
-            let delayInSeconds:Int64 = 1000000000 * 2
-            var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
-            dispatch_after(popTime, dispatch_get_main_queue(), {
-                self.scrollView!.contentSize = self.view.frame.size
-                self.scrollView!.headerEndRefreshing()
-                })
-            })
-        
-        self.scrollView!.addFooterWithCallback({
-            let delayInSeconds:Int64 =  1000000000 * 2
-            var popTime:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW,delayInSeconds)
-            dispatch_after(popTime, dispatch_get_main_queue(), {
-                   var size:CGSize = self.scrollView!.frame.size
-                    size.height = size.height + 300
-                    self.scrollView!.contentSize = size
-                    self.scrollView!.footerEndRefreshing()
-                
-                
-                })
-            })
-    }
+        self.scrollView!.addHeaderWithCallback {
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.scrollView!.contentSize = self.view.frame.size
+                    self.scrollView!.headerEndRefreshing()
+                })
+            }
+        
+        self.scrollView!.addFooterWithCallback {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                var size:CGSize = self.scrollView!.frame.size
+                size.height = size.height + 300
+                self.scrollView!.contentSize = size
+                self.scrollView!.footerEndRefreshing()
+            })
+        }
     }
-
-
 }
 
