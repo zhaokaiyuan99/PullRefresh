@@ -14,8 +14,7 @@ class RootViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "TableViewCellIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
        
         
         // tas.assaf()
@@ -27,45 +26,34 @@ class RootViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 2
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-     
-        if indexPath.row == 0 {
-            self.navigationController?.pushViewController(MyTableViewController(), animated: true)
-        }else if indexPath.row == 1{
-            self.navigationController?.pushViewController(MyScrollViewController(), animated: true)
-        }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(MyScrollViewController(), animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
         
-        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("Cell") as? UITableViewCell
-        
-        if cell == nil { // no value
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell") as UITableViewCell
-            cell!.selectionStyle = UITableViewCellSelectionStyle.None
-            var label = UILabel()
-            label.frame = CGRectMake(0, 0, 320, 36)
-            label.font = UIFont.boldSystemFontOfSize(13)
-            label.textColor = UIColor.blackColor()
-            label.backgroundColor = UIColor.clearColor()
-            label.textAlignment = NSTextAlignment.Center
-            cell!.contentView.addSubview(label)
+      
+            let label = UILabel()
+            label.frame = CGRect(origin: .zero, size: CGSize(width: 320, height: 36))
+            label.font = UIFont.boldSystemFont(ofSize: 13)
+            label.textColor = UIColor.black
+            label.backgroundColor = UIColor.clear
+            label.textAlignment = .center
+            cell.contentView.addSubview(label)
             label.tag = 1000001
-        }
-        var label:UILabel = cell!.contentView.viewWithTag(1000001) as  UILabel
+        label.text = "scrollView"
         
-        if indexPath.row == 0 {
-         label.text = "tableView"
-        }else if indexPath.row == 1{
-         label.text = "scrollView"
-        }
-        return cell!
+        return cell
     }
     
     
